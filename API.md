@@ -157,3 +157,65 @@
             'student_id':'pj'
         }
 ```
+### response
+* success
+``` json
+    {
+        'status':'200',
+    }
+```
+
+* failed
+``` json
+    {
+        'status':'400',
+    }
+```
+
+## /mapping/getClass/student
+### request
+``` json
+        {
+            'student_id':'pj'
+        }
+```
+### response
+* success
+``` json
+    {
+        'status':'200',
+        'data':[
+            {'id':'class1'},{'id':'class2'},……
+            ]
+    }
+```
+* failed
+``` json
+    {
+        'status':'400',
+        'data':[]
+    }
+```
+## /mapping/getChooseStudent
+``` json
+        {
+            'class_id': 'class1',
+        }
+```
+### response
+* success
+``` json
+    {
+        'status':'200',
+        'data':[
+            {'id':'student1''},{'id':'student2'},……
+            ]
+    }
+```
+* failed
+``` json
+    {
+        'status':'400',
+        'data':[]
+    }
+```
