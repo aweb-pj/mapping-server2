@@ -12,6 +12,6 @@ urlpatterns = [
     url(r'^addTree$', views.addTree),
     url(r'^updateTree$', views.updateTree),
     url(r'^chooseClass$', views.chooseClass),
-    url(r'^getClass/student', views.getTeacherClass),
+    url(r'^getClass/student', views.getStudentClass),
     url(r'^getChooseStudent', views.getChooseStudent),
 ]

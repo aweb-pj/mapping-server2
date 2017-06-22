@@ -3,7 +3,7 @@
 ### request
 ``` json
         {
-            'teacher_id' : 'pj',
+            'user_id' : 'pj',
             'password' : '1234'
         }
 ```
@@ -27,7 +27,7 @@
 ### request
 ``` json
         {
-            'teacher_id' : 'pj',
+            'user_id' : 'pj',
             'password' : '1234'
         }
 ```
@@ -71,7 +71,7 @@
     }
 ```
 
-## /mapping/getClass
+## /mapping/getClass/teacher
 ### request
 ``` json
         {
@@ -147,4 +147,13 @@
             {'id':'tree1'},{'id':'tree2'},……
             ]
     }
+```
+
+## /mapping/chooseClass
+### request
+``` json
+        {
+            'class_id': 'class1',
+            'student_id':'pj'
+        }
 ```

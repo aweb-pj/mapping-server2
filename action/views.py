@@ -175,7 +175,7 @@ def updateTree(request):
 
 def chooseClass(request):
     class_id = request.POST['class_id']
-    student_id = request.POST['tree_id']
+    student_id = request.POST['student_id']
     classes = Clazz.objects.filter(id=class_id)
     if (len(classes) == 0):
         status = '400'
@@ -184,7 +184,8 @@ def chooseClass(request):
         if (len(students) == 0):
             status = '400'
         else:
-            chooseclass = ChooseClass(class_id = class_id,student_id = student_id)
+            status = '200'
+            chooseclass = ChooseClass(clazz_id = class_id,student_id = student_id)
             chooseclass.save()
     result = {
         'status': status
@@ -199,6 +200,7 @@ def getStudentClass(request):
         data = []
         print('student is 0')
     else:
+        status = '200'
         chooseClassList = ChooseClass.objects.filter(student_id = student_id)
         data = ChooseClassSerializer.getClassList(chooseClassList)
 

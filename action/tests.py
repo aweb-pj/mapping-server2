@@ -53,7 +53,7 @@ class MyTest(TestCase):
 
     def GetClass(self):
         #getClass test
-        url = '/mapping/getClass'
+        url = '/mapping/getClass/teacher'
         data = {
             'teacher_id': 'pj'
         }
