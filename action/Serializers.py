@@ -25,3 +25,24 @@ class TreeSerializer:
             }
             array.append(item)
         return array
+
+class ChooseClassSerializer:
+    @staticmethod
+    def getClassList(chooseClassList):
+        array = []
+        for chooseClass in chooseClassList:
+            item = {
+                'id': chooseClass.clazz_id
+            }
+            array.append(item)
+        return array
+
+    @staticmethod
+    def getStudentList(chooseClassList):
+        array = []
+        for chooseClass in chooseClassList:
+            item = {
+                'id': chooseClass.student_id
+            }
+            array.append(item)
+        return array

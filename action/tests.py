@@ -8,7 +8,7 @@ class MyTest(TestCase):
     def Register(self):
         url = '/mapping/register'
         data = {
-            'teacher_id' : 'pj',
+            'user_id' : 'pj',
             'password' : '1234'
         }
         correct_data = {
@@ -23,7 +23,7 @@ class MyTest(TestCase):
         #self.Register()
         url = '/mapping/login'
         data = {
-            'teacher_id':'pj',
+            'user_id':'pj',
             'password':'1234'
         }
         correct_data = {

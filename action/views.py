@@ -14,12 +14,12 @@ def index(request):
 
 def login(request):
     print('come to login')
-    teacher_id = request.POST['teacher_id']
+    user_id = request.POST['user_id']
     password = request.POST['password']
-    teachers = Teacher.objects.filter(id = teacher_id,password = password)
-    tmp = Teacher.objects.all()[0]
+    user = User.objects.filter(id = user_id,password = password)
+    tmp = User.objects.all()[0]
     print(tmp.id)
-    if(len(teachers)==0):
+    if(len(user)==0):
         status = '400'
     else:
         status = '200'
@@ -31,15 +31,15 @@ def login(request):
 
 def register(request):
     print('come to register')
-    teacher_id = request.POST['teacher_id']
-    print(teacher_id)
+    user_id = request.POST['user_id']
+    print(user_id)
     password = request.POST['password']
-    teachers = Teacher.objects.filter(id = teacher_id,password = password)
-    if(len(teachers)!=0):
+    users = User.objects.filter(id = user_id,password = password)
+    if(len(users)!=0):
         status = '400'
     else:
-        teacher = Teacher(id = teacher_id,password = password)
-        teacher.save()
+        user = User(id = user_id,password = password)
+        user.save()
         status = '200'
     result = {
         'status': status
@@ -49,7 +49,7 @@ def register(request):
 def addClass(request):
     teacher_id = request.POST['teacher_id']
     class_id = request.POST['class_id']
-    teachers = Teacher.objects.filter(id=teacher_id)
+    teachers = User.objects.filter(id=teacher_id)
     if (len(teachers) == 0):
         status = '400'
     else:
@@ -66,10 +66,10 @@ def addClass(request):
     }
     return HttpResponse(objectToJson(result))
 
-def getClass(request):
+def getTeacherClass(request):
     teacher_id = request.POST['teacher_id']
     print(teacher_id)
-    teachers = Teacher.objects.filter(id = teacher_id)
+    teachers = User.objects.filter(id = teacher_id)
     if(len(teachers) == 0):
         status = '400'
         data = []
@@ -93,7 +93,7 @@ def getClass(request):
 def updateClass(request):
     teacher_id = request.POST['teacher_id']
     class_id = request.POST['class_id']
-    teachers = Teacher.objects.filter(id=teacher_id)
+    teachers = User.objects.filter(id=teacher_id)
     if (len(teachers) == 0):
         status = '400'
     else:
@@ -170,5 +170,57 @@ def updateTree(request):
 
     result = {
         'status': status
+    }
+    return HttpResponse(objectToJson(result))
+
+def chooseClass(request):
+    class_id = request.POST['class_id']
+    student_id = request.POST['tree_id']
+    classes = Clazz.objects.filter(id=class_id)
+    if (len(classes) == 0):
+        status = '400'
+    else:
+        students = User.objects.filter(id = student_id,role = 'STUDENT')
+        if (len(students) == 0):
+            status = '400'
+        else:
+            chooseclass = ChooseClass(class_id = class_id,student_id = student_id)
+            chooseclass.save()
+    result = {
+        'status': status
+    }
+    return HttpResponse(objectToJson(result))
+
+def getStudentClass(request):
+    student_id = request.POST['student_id']
+    students = User.objects.filter(id=student_id)
+    if (len(students) == 0):
+        status = '400'
+        data = []
+        print('student is 0')
+    else:
+        chooseClassList = ChooseClass.objects.filter(student_id = student_id)
+        data = ChooseClassSerializer.getClassList(chooseClassList)
+
+    result = {
+        'status': status,
+        'data': data
+    }
+    return HttpResponse(objectToJson(result))
+
+def getChooseStudent(request):
+    class_id = request.POST['class_id']
+    classes = Clazz.objects.filter(id=class_id)
+    if (len(classes) == 0):
+        status = '400'
+        data = []
+    else:
+        status = '200'
+        chooseClassList = ChooseClass.objects.filter(clazz_id = classes[0].id)
+        data = ChooseClassSerializer.getStudentList(chooseClassList)
+
+    result = {
+        'status': status,
+        'data': data
     }
     return HttpResponse(objectToJson(result))
